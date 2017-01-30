@@ -52,6 +52,14 @@ namespace PowerProfileSwitcher
         private void monitorOff_Click(object sender, EventArgs e)
         {
             ApiCalls.PowerOffDisplay();
+            Timer t = new Timer();
+            t.Interval = 200;
+            t.Tick += delegate (object ss, EventArgs ee)
+            {
+                ApiCalls.PowerOffDisplay();
+                t.Stop();
+            };
+            t.Start();
         }
 
         private void screensaver_Click(object sender, EventArgs e)
